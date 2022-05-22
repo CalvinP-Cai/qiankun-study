@@ -28,16 +28,46 @@ registerMicroApps([
   {
     name: 'react-micro-app',
     entry: '//localhost:3000',
-    container: '#container',
-    activeRule: '/app-react'
+    container: '#root',
+    activeRule: '/app-react',
+    loader: (loading) => {
+      console.log('react-micro-app is loading:', loading)
+    },
+    props: {
+
+    }
   },
   {
     name: 'vue-micro-app',
     entry: '//localhost:8082',
-    container: '#container',
-    activeRule: '/app-vue'
+    container: '#root',
+    activeRule: '/app-vue',
+    // activeRule: location => location.pathname.startsWith('wework')
+    loader: (loading) => {
+      console.log('vue-micro-app is loading:', loading)
+    },
+    props: {
+
+    }
   },
-])
+],
+{
+  beforeLoad: [
+    app => {
+      console.log('[LifeCycle] before load %c%s', 'color: green;', app.name);
+    },
+  ],
+  beforeMount: [
+    app => {
+      console.log('[LifeCycle] before mount %c%s', 'color: green;', app.name);
+    },
+  ],
+  afterUnmount: [
+    app => {
+      console.log('[LifeCycle] after unmount %c%s', 'color: green;', app.name);
+    },
+  ],
+})
 
 const { onGlobalStateChange, setGlobalState } = initGlobalState({
   user: 'qiankun',
@@ -64,7 +94,7 @@ setDefaultMountApp('/app-react');
  */
 start()
 
-
+// 第一个微应用 mount 后需要调用的方法，比如开启一些监控或者埋点脚本。
 runAfterFirstMounted(() => {
   console.log('[MainApp] first app mounted');
 });

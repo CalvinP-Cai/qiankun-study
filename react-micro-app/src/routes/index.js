@@ -6,14 +6,19 @@ import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 // import store from '../store'
 
 // 首页
-import Home from '../pages/Home'
+const Home = React.lazy(() => import('../pages/Home'))
+
+// MERP版（商贸版）
+const Merp = React.lazy(() => import('../pages/Merp/routes'))
 
 const routes = () => (
   <Router basename={window.__POWERED_BY_QIANKUN__ ? '/app-react' : '/'}>
     <Suspense fallback={null}>  
       <Switch>
-        <Route exact path="/"  component={<Home />}/>
+        <Route exact path="/"  component={Home}/>
         <Route exact path="/home"  component={Home}/>
+
+        <Route path="merp" component={Merp} />
       </Switch>
     </Suspense>
   </Router>

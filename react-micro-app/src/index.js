@@ -1,7 +1,7 @@
 import './public-path'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
 import Routes from './routes'
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -10,7 +10,7 @@ function render (props) {
   const { container  } = props
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      {/* <App /> */}
       <Routes />
     </React.StrictMode>,
     container  ? container.querySelector('#root') : document.getElementById('root')

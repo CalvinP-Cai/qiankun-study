@@ -51,6 +51,16 @@ module.exports = {
     config.hot = false
     config.watchContentBase = false
     config.liveReload = false
+    config.open = false
+
+    // config.proxy = {
+    //   '/api': {
+    //     target: 'https://api.github.com',
+    //     pathRewrite: {"^/api" : ""},
+    //     changeOrigin: true
+    //   }
+    // }
+
 
     return config
   },

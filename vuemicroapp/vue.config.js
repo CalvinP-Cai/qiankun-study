@@ -4,7 +4,11 @@ module.exports = {
   lintOnSave: false,
   outputDir: 'dist',
   devServer: {
+    open: false,
     port: 8082,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
     headers: {
       'Access-Control-Allow-Origin': '*',
     }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Menu, Layout } from 'antd'
+import React, { useState, useEffect } from 'react'
+import { Menu, Layout, Button, Space } from 'antd'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -11,16 +11,31 @@ import './index.css'
 
 const { Header, Sider, Content } = Layout
 
-const Home = () => {
+const Home = ({
+  history
+}) => {
   const [collapsed, setCollapsed] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/users')
+      .then(response => response.json())
+      .then(data => console.log('react-app请求', data));
+  }, [])
 
   const handleMenuItemClick = ({ item, key, keyPath, domEvent }) => {
     console.log(item, key, keyPath)
   }
 
+  const handleGoto = () => {
+    window.history.pushState(null, 'app-vue', '/app-vue/#/about')
+  }
+
+  const handleGotoThisApp = () => {
+
+  }
   return (
     <Layout>
-      <Sider
+      {/* <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
@@ -56,7 +71,7 @@ const Home = () => {
             },
           ]}
         />
-      </Sider>
+      </Sider> */}
       <Layout className='site-layout'>
         <Header className='site-layout-background' style={{ padding: 0 }}>
           {React.createElement(
@@ -75,7 +90,10 @@ const Home = () => {
             minHeight: 280,
           }}
         >
-          Content
+          <Space>
+            <Button onClick={handleGoto}>跳转到其他子应用</Button>
+            <Button onClick={handleGotoThisApp}>跳转到该子应用下的其他路由</Button>
+          </Space>
         </Content>
       </Layout>
     </Layout>

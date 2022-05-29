@@ -6,6 +6,8 @@ import VueRouter from "vue-router";
 
 Vue.config.productionTip = false;
 
+Vue.use(VueRouter)
+
 let router = null
 let instance = null
 
@@ -13,7 +15,8 @@ function render (props = {}) {
   let {container} = props
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? '/app-vue' : '/',
-    mode: 'history',
+    // "hash" | "history" | "abstract"
+    mode: 'hash',
     routes
   })
 
